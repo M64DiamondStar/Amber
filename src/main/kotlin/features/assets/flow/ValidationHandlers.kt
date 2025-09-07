@@ -131,9 +131,9 @@ class ValidationHandlers(private val tagHandlers: TagHandlers) {
 
             CheckStep.PASTE_LINK -> {
                 // Paste link check
-                val pasteLinkMessage = textChannel.sendMessage("_Checking paste link..._").complete()
                 val id = pasteLink.substringAfterLast('/').substringBefore('?')
                 val pasteContent = PasteServerClient.getPasteContent(id)
+                val pasteLinkMessage = textChannel.sendMessage("_Checking paste link... (`$id`)_").complete()
 
                 if(pasteContent == null || pasteContent.isBlank()){
                     val fixButton = Button.primary("cl-fix-paste-link", "Fix paste link")

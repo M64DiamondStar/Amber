@@ -1,5 +1,6 @@
 package me.m64diamondstar.features.assets.flow
 
+import dev.minn.jda.ktx.coroutines.await
 import me.m64diamondstar.EffectLibraryClient
 import me.m64diamondstar.config.AssetsConfig
 import me.m64diamondstar.features.assets.util.Permissions
@@ -8,6 +9,7 @@ import net.dv8tion.jda.api.components.actionrow.ActionRow
 import net.dv8tion.jda.api.components.buttons.Button
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent
+import net.dv8tion.jda.api.exceptions.DetachedEntityException
 import java.awt.Color
 
 class FinalizeHandlers {
@@ -41,18 +43,16 @@ class FinalizeHandlers {
         val modRole = textChannel.guild.getRoleById(modId)
 
         try {
-            val member = textChannel.guild.retrieveMemberById(mapping.userId).complete()
+            val member = textChannel.guild.retrieveMemberById(mapping.userId).await()
             val asset = EffectLibraryClient.getAssetById(assetId)
 
-            textChannel.history.retrievePast(100).queue { messages ->
-                textChannel.deleteMessages(messages).queue(
-                    {},
-                    {
-                        for (message in messages) {
-                            message.delete().queue()
-                        }
-                    }
-                )
+            val messages = textChannel.history.retrievePast(100).await()
+            try {
+                textChannel.deleteMessages(messages).await()
+            } catch (_: DetachedEntityException) {
+                for (message in messages) {
+                    message.delete().await()
+                }
             }
 
             // Retrieve original message ID if you want to update the original embed
@@ -81,7 +81,7 @@ class FinalizeHandlers {
                         Button.danger("cl-delete", "Delete asset")
                     )
                 )
-                .queue()
+                .await()
 
             // Notify user that setup is finished
             textChannel.sendMessage(
