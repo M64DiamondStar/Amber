@@ -41,6 +41,8 @@ class GuildReadyListener {
                         subcommand("asset-category", "Set the category new assets will be created in") {
                             option<Channel>("category", "The asset category for the community library")
                         }
+
+                        subcommand("moderation", "Sends the moderation buttons into an asset channel.")
                     }
                 )
 

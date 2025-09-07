@@ -48,6 +48,7 @@ class AdminCommands(private val jda: JDA) {
             when(event.fullCommandName.trim()) {
                 "admin community-library info-channel" -> handleCommunityLibraryInfo(event)
                 "admin community-library asset-category" -> handleCommunityLibraryCategory(event)
+                "admin community-library moderation" -> handleCommunityLibraryModeration(event)
                 "admin shutdown" -> handleShutdown(event)
                 "admin mod" -> handleModRole(event)
             }
@@ -106,6 +107,34 @@ class AdminCommands(private val jda: JDA) {
         val newConfig = ChannelAssetMappings(category.id, config.modId, config.mappings)
         AssetsConfig.saveMappings(newConfig)
         event.hook.sendMessage("Changed category ID to: ${category.id}").queue()
+    }
+
+    fun handleCommunityLibraryModeration(event: SlashCommandInteractionEvent) {
+        event.deferReply().queue()
+
+        val config = AssetsConfig.loadMappings()
+        val mapping = config.mappings
+            .firstOrNull { it.channelId == event.channel.id }
+
+        if (mapping == null) {
+            // If no mapping exists, send error message
+            event.hook.sendMessage("❌ Something went wrong, I cannot find this asset's session.")
+                .addComponents(
+                    ActionRow.of(
+                        Button.secondary("cl-finalize-retry", "Try again...")
+                    )
+                ).queue()
+            return
+        }
+
+        event.hook.sendMessage("Here're your moderation buttons!")
+            .setComponents(
+                ActionRow.of(
+                    Button.success("cl-approve", "Approve asset"),
+                    Button.danger("cl-delete", "Delete asset")
+                )
+            )
+            .queue()
     }
 
     fun handleModRole(event: SlashCommandInteractionEvent) {
