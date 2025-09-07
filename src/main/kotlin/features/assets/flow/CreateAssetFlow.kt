@@ -2,6 +2,7 @@ package me.m64diamondstar.features.assets.flow
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import me.m64diamondstar.BadWordFilter
 import me.m64diamondstar.BotScope
 import me.m64diamondstar.EffectLibraryClient
 import me.m64diamondstar.config.AssetsConfig
@@ -159,6 +160,22 @@ class CreateAssetFlow(private val assetSessionService: AssetSessionService, priv
             tagsIds = emptyList()
         )
 
+        val badName = BadWordFilter.containsBadWord(name)
+        val badDescription = BadWordFilter.containsBadWord(description)
+
+        if (badName || badDescription) {
+            val message = "❌ The " +
+                when {
+                badName && badDescription -> "**name** and **description**"
+                badName -> "**name**"
+                else -> "**description**"
+            } +  " you entered contained a bad word! Please don't use bad words :(\n-# Please contact a moderator if you think this is an error."
+
+            event.hook.editOriginal(message).setComponents().queue()
+            assetSessionService.clearSession(event.user.id) // optional: clear the session to force restart
+            return
+        }
+
         try {
             val asset = EffectLibraryClient.createAsset(request)
 
@@ -199,7 +216,13 @@ class CreateAssetFlow(private val assetSessionService: AssetSessionService, priv
                                     .setThumbnail("https://i.ibb.co/v51H0jY/m64-dev-ANIME-pf-512.png")
                                     .setColor(Color.ORANGE)
                                     .build()
-                            ).complete()
+                            )
+                            .setComponents(
+                                ActionRow.of(
+                                    Button.danger("cl-delete", "Delete asset")
+                                )
+                            )
+                            .complete()
 
                         val config = AssetsConfig.loadMappings()
                         val mappings = config.mappings.toMutableList()

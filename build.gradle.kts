@@ -25,6 +25,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.5.13")
     implementation("io.github.Xirado:JDA:b6a5a80b5c")
     implementation("club.minnced:jda-ktx:0.13.0")
+    implementation("org.yaml:snakeyaml:2.5")
 
     // Algolia and its required dependencies
     implementation("com.algolia:algoliasearch-client-kotlin:3.26.0") {

@@ -9,6 +9,7 @@ import me.m64diamondstar.commands.SimpleUserCommands
 import me.m64diamondstar.features.AssetModule
 import me.m64diamondstar.listeners.GuildReadyListener
 import me.m64diamondstar.services.effectlibrary.EffectLibraryClient
+import me.m64diamondstar.services.filter.BadWordFilter
 import me.m64diamondstar.services.paste.PasteServerClient
 import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.requests.GatewayIntent
@@ -44,6 +45,8 @@ val EffectLibraryClient = EffectLibraryClient(
 )
 
 val PasteServerClient = PasteServerClient()
+
+val BadWordFilter = BadWordFilter()
 
 object BotScope : CoroutineScope by CoroutineScope(Dispatchers.Default)
 
