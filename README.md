@@ -37,4 +37,7 @@ The project is under MIT license so you can do with it whatever you want, but th
 This project is licensed under the MIT License.
 You are free to read, fork, and learn from this repository, but the hosted bot is not for public use.
 
+:warning: This project includes a bad word list sourced from [GS-REGEXChatFilter](https://github.com/PlayGlowCraft/GS-REGEXChatFilter),
+licensed under the GNU General Public License v3.0.
+
 <img width="512" height="512" alt="m64_dev ANIME pf_512" src="https://github.com/user-attachments/assets/51f4af4c-34fa-431e-baca-5cf2280816bc" />
