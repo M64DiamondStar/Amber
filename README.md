@@ -40,4 +40,6 @@ You are free to read, fork, and learn from this repository, but the hosted bot i
 :warning: This project includes a bad word list sourced from [GS-REGEXChatFilter](https://github.com/PlayGlowCraft/GS-REGEXChatFilter),
 licensed under the GNU General Public License v3.0.
 
-<img width="512" height="512" alt="m64_dev ANIME pf_512" src="https://github.com/user-attachments/assets/51f4af4c-34fa-431e-baca-5cf2280816bc" />
+<img width="512" height="512" alt="m64_dev ANIME pfp_512" src="https://github.com/user-attachments/assets/372e46a2-1c9b-43a4-a7d0-f89dd3c0452f" />
+
+
