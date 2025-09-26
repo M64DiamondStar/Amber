@@ -27,6 +27,10 @@ class GuildReadyListener {
             slash("discord", "Sends the discord invite link")
             slash("download", "Sends the EffectMaster download link")
             slash("docs", "Sends the EffectMaster documentation")
+            slash("coinflip", "Flip a coin")
+            slash("roll", "Roll dice") {
+                option<Int>("amount", "The maximum amount to roll (default is 6)", required = false)
+            }
 
             // Admin-only commands
             slash("admin", "The base command for all admin settings") {
