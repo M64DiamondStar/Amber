@@ -1,7 +1,6 @@
 package me.m64diamondstar.commands.`fun`
 
 import dev.minn.jda.ktx.events.listener
-import dev.minn.jda.ktx.messages.editMessage
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import java.util.concurrent.TimeUnit
