@@ -6,6 +6,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import me.m64diamondstar.commands.AdminCommands
 import me.m64diamondstar.commands.SimpleUserCommands
+import me.m64diamondstar.commands.`fun`.FunCommands
+import me.m64diamondstar.config.loadQuotes
 import me.m64diamondstar.features.AssetModule
 import me.m64diamondstar.listeners.GuildReadyListener
 import me.m64diamondstar.services.effectlibrary.EffectLibraryClient
@@ -27,6 +29,7 @@ fun main() {
     // Register commands
     AdminCommands(jda)
     SimpleUserCommands(jda)
+    FunCommands(jda)
 
     // Register listeners
     GuildReadyListener().register(jda)
@@ -47,6 +50,8 @@ val EffectLibraryClient = EffectLibraryClient(
 val PasteServerClient = PasteServerClient()
 
 val BadWordFilter = BadWordFilter()
+
+val quotes = loadQuotes()
 
 object BotScope : CoroutineScope by CoroutineScope(Dispatchers.Default)
 
