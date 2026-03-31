@@ -6,7 +6,7 @@ plugins {
 
 group = "me.m64diamondstar"
 version = "1.0-SNAPSHOT"
-val ktorVersion = "3.2.3"
+val ktorVersion = "3.3.2"
 
 repositories {
     mavenCentral()
