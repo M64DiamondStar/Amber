@@ -3,10 +3,6 @@
   <component name="DiscordIJSettingProjectState">
     <option name="displayMode" value="PROJECT" />
   </component>
-  <component name="DiscordProjectSettings">
-    <option name="show" value="ASK" />
-    <option name="description" value="" />
-  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
