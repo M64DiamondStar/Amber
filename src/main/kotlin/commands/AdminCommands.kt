@@ -3,6 +3,8 @@ package me.m64diamondstar.commands
 import dev.minn.jda.ktx.events.listener
 import me.m64diamondstar.config.AssetsConfig
 import me.m64diamondstar.config.ChannelAssetMappings
+import me.m64diamondstar.config.GeneralConfig
+import me.m64diamondstar.config.GeneralMapping
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.components.actionrow.ActionRow
 import net.dv8tion.jda.api.components.buttons.Button
@@ -49,6 +51,7 @@ class AdminCommands(private val jda: JDA) {
                 "admin community-library info-channel" -> handleCommunityLibraryInfo(event)
                 "admin community-library asset-category" -> handleCommunityLibraryCategory(event)
                 "admin community-library moderation" -> handleCommunityLibraryModeration(event)
+                "admin log-channel" -> handleLogChannel(event)
                 "admin shutdown" -> handleShutdown(event)
                 "admin mod" -> handleModRole(event)
             }
@@ -152,6 +155,35 @@ class AdminCommands(private val jda: JDA) {
         event.hook.sendMessage("Shutting down now...").queue {
             jda.shutdown()
         }
+    }
+
+    fun handleLogChannel(event: SlashCommandInteractionEvent) {
+        event.deferReply(true).queue()
+        val channel = event.getOption("channel")?.asChannel
+
+        val config = GeneralConfig.loadMappings()
+
+        if(channel == null) {
+            event.hook.sendMessage(
+                if(config.logsChannelId != null)
+                    "Current logs channel ID set to: ${config.logsChannelId}"
+                else
+                    "Logs channel ID hasn't been set yet."
+            ).queue()
+            return
+        }
+
+        if (channel.type != ChannelType.TEXT) {
+            event.hook.sendMessage("The channel must be a text channel!").queue()
+            return
+        }
+
+        val newConfig = GeneralMapping(
+            channel.id
+        )
+
+        GeneralConfig.saveMappings(newConfig)
+        event.hook.sendMessage("The log channel id has been set to ${channel.id}.").queue()
     }
 
 }

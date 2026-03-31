@@ -10,6 +10,7 @@ import me.m64diamondstar.config.loadJokes
 import me.m64diamondstar.config.loadQuotes
 import me.m64diamondstar.features.AssetModule
 import me.m64diamondstar.listeners.GuildReadyListener
+import me.m64diamondstar.listeners.MessageListener
 import me.m64diamondstar.listeners.UserStatusListener
 import me.m64diamondstar.services.effectlibrary.EffectLibraryClient
 import me.m64diamondstar.services.filter.BadWordFilter
@@ -28,6 +29,8 @@ fun main() {
         intents = listOf(
             GatewayIntent.GUILD_MEMBERS,
             GatewayIntent.MESSAGE_CONTENT,
+            GatewayIntent.GUILD_MESSAGES,
+            GatewayIntent.DIRECT_MESSAGES,
             GatewayIntent.GUILD_PRESENCES)
     ) {
         enableCache(CacheFlag.ONLINE_STATUS)
@@ -42,6 +45,7 @@ fun main() {
     // Register listeners
     GuildReadyListener().register(jda)
     UserStatusListener().register(jda)
+    MessageListener().register(jda)
 
     // Resister asset library
     AssetModule(jda).register()

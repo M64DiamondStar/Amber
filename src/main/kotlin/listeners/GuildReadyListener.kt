@@ -51,6 +51,10 @@ class GuildReadyListener {
                     }
                 )
 
+                subcommand("log-channel", "Sets the log channel") {
+                    option<Channel>("channel", "The channel to use as log channel")
+                }
+
                 subcommand("mod", "Sets the mod role") {
                     option<Role>("role", "The mod role", true)
                 }
