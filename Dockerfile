@@ -1,5 +1,5 @@
 # Use official Kotlin/Java base image
-FROM openjdk:21-jdk-slim
+FROM amazoncorretto:25
 
 WORKDIR /app
 
