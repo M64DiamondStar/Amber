@@ -24,6 +24,7 @@ class GuildReadyListener {
 
             // User commands
             slash("quote", "Get a random quote")
+            slash("joke", "Tells a potentially funny joke")
             slash("discord", "Sends the discord invite link")
             slash("download", "Sends the EffectMaster download link")
             slash("docs", "Sends the EffectMaster documentation")
