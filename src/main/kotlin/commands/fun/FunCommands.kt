@@ -76,12 +76,12 @@ class FunCommands(jda: JDA) {
     }
 
     fun handleJoke(event: SlashCommandInteractionEvent) {
-        event.deferReply()
+        event.deferReply().queue()
 
         val joke = jokes.random()
         event.hook.sendMessage(
             "${joke.setup} ||${joke.punchline}||\n" +
-                    "-# _Check out the [source](<https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json>) of the jokes!_")
+                    "-# Check out the [source](<https://github.com/15Dkatz/official_joke_api/blob/master/jokes/index.json>) of the jokes!")
             .addComponents(
                 ActionRow.of(
                     Button.secondary("joke-regenerate", "Regenerate")
